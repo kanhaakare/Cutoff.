@@ -10,7 +10,7 @@ st.write("Enter the details below to predict the admission cutoff figure using t
 # Load the quantized model pipeline
 @st.cache_resource
 def load_model():
-    return joblib.load('model_quantized_25mb.pkl')
+    return joblib.load('model.pkl')
 
 try:
     pipeline = load_model()
