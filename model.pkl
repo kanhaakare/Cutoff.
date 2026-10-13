@@ -1,1 +1,9 @@
+import joblib, os, sklearn
 
+joblib.dump(pipeline, 'model.pkl', compress=3)   # use your actual pipeline variable
+print("size (bytes):", os.path.getsize('model.pkl'))
+print("scikit-learn:", sklearn.__version__)
+
+# Test that it loads and predicts before uploading
+m = joblib.load('model.pkl')
+print(type(m))
