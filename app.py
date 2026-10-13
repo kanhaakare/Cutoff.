@@ -1,4 +1,3 @@
-import os
 import streamlit as st
 import pandas as pd
 import joblib
@@ -13,26 +12,11 @@ st.write("Enter the details below to predict the admission cutoff figure using t
 def load_model():
     return joblib.load('model.pkl')
 
-pipeline = None
 try:
     pipeline = load_model()
     st.success("Model loaded successfully!")
 except Exception as e:
     st.error(f"Error loading model: {e}")
-    # Temporary diagnostics: shows why loading failed
-    with st.expander("Diagnostics (remove once fixed)", expanded=True):
-        st.write("Files in app folder:", os.listdir('.'))
-        if os.path.exists('model.pkl'):
-            st.write("model.pkl size (bytes):", os.path.getsize('model.pkl'))
-        try:
-            import sklearn
-            st.write("scikit-learn version:", sklearn.__version__)
-        except Exception as ie:
-            st.write("scikit-learn import failed:", str(ie))
-        st.write("numpy version:", np.__version__)
-        st.write("pandas version:", pd.__version__)
-        st.write("joblib version:", joblib.__version__)
-    st.stop()  # nothing below runs without a model
 
 # Input fields for user
 university = st.text_input("University", "University of Delhi")
